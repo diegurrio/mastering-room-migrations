@@ -59,8 +59,6 @@ If your new type is nullable, a default is not required:
 database.execSQL("ALTER TABLE Student ADD COLUMN nickName TEXT NULL")
 ```
 
-You can see a pull request diff of this type of migration [here](https://github.com/AdamMc331/mastering-room-migrations/pull/1).
-
 # Removing A Field From An Existing Table
 
 SQLite does not support removing a column from a table directly. Instead we need to do the following:
@@ -79,13 +77,9 @@ database.execSQL("DROP TABLE Student")
 database.execSQL("ALTER TABLE Student_backup RENAME TO Student")
 ```
 
-You can see a pull request implementing and testing this type of migration [here](https://github.com/AdamMc331/mastering-room-migrations/pull/2).
-
 # Changing The Data Type Of A Field
 
 Similar to the removing a field example, SQLite doesn't support the action of changing a data type. Instead, we need to create a back up table, copy everything over, and rename it.
-
-Keep in mind the type of data is important in this change. In the [sample pull request](https://github.com/AdamMc331/mastering-room-migrations/pull/3) we are moving from an integer to a floating point number. Moving from a number to a string type may be more complicated.
 
 Here is an example of this change:
 
@@ -96,24 +90,5 @@ database.execSQL("DROP TABLE Student")
 database.execSQL("ALTER TABLE Student_backup RENAME TO Student")
 ```
 
-# Adding A New Entity
-
-When adding a new entity to your project, all you need is the relevant create table statement:
-
-```kotlin
-database.execSQL("CREATE TABLE University (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, schoolName TEXT NOT NULL)")
-```
-
-If you have trouble determining what the right syntax is, you can always look at the [json file that room generates](app/schemas/com.adammcneilly.masteringroommigrations.StudentDatabase/5.json).
-
-You can find the pull request demonstrating that [here](https://github.com/AdamMc331/mastering-room-migrations/pull/4).
-
-# Removing An Entity
-
-When removing an entity from your project, the only SQL needed is a drop table statement:
-
-```kotlin
-database.execSQL("DROP TABLE University")
-``` 
-
-You can find a pull request for that [here](https://github.com/AdamMc331/mastering-room-migrations/pull/5).
+# More Information
+This project was based on this [lecture](https://androidessence.com/mastering-room-database-migrations)
